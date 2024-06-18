@@ -52,6 +52,21 @@ namespace CapitalPlacementTask.Data.Repository.Implementation
                 throw;
             }
         }
+        public async Task<bool> InsertMultipleAsync(IEnumerable<T> entities)
+        {
+            try
+            {
+                await _context.Set<T>().AddRangeAsync(entities);
+                await _context.SaveChangesAsync(); // Assuming _context is your DbContext
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception or log it
+                throw new Exception("Error inserting entities", ex);
+            }
+        }
+
 
         public async Task<T> GetFirstAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includes)
         {
@@ -131,17 +146,21 @@ namespace CapitalPlacementTask.Data.Repository.Implementation
             }
         }
 
-        public void Update(T entity)
+        public async Task<bool> UpdateAsync(T entity)
         {
             try
             {
                 _context.Set<T>().Update(entity);
+                await _context.SaveChangesAsync(); // Assuming _context is your DbContext
+                return true;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw;
+                // Handle the exception or log it
+                throw new Exception("Error updating entity", ex);
             }
         }
+
 
         public void Reload(ref T entity)
         {

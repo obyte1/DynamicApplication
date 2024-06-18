@@ -16,9 +16,10 @@ namespace CapitalPlacementTask.Data.Repository.Interface
         Task<T> GetFirstAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includes);
         Task<T> GetOneAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includes);
         Task InsertAsync(T entity);
+        Task<bool> InsertMultipleAsync(IEnumerable<T> entities);
         void Reload(ref T entity);
         Task SoftDeleteAsync(T entity);
-        void Update(T entity);
+        Task<bool> UpdateAsync(T entity);
         void UpdateRange(IEnumerable<T> entities);
 
     }

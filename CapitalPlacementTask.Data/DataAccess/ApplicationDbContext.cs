@@ -8,7 +8,6 @@ namespace CapitalPlacementTask.Data.DataAccess
         {
         }
 
-        public DbSet<Authorizer> Authorizers { get; set; }
 
     }
 }

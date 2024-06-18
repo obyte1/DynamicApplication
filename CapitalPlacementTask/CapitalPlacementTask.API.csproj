@@ -9,4 +9,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CapitalPlacementTask.Data\CapitalPlacementTask.Data.csproj" />
+    <ProjectReference Include="..\CapitalPlacmentTask.Business\CapitalPlacementTask.Business.csproj" />
+  </ItemGroup>
+
 </Project>

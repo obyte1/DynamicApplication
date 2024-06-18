@@ -18,7 +18,7 @@ namespace CapitalPlacementTask.Business.Services.Implementation
             _candidateRepository = candidateRepository;
         }
 
-        public async Task<bool> SaveCandidateResponseAsync(CandidateDto request)
+        public async Task<bool> SaveACandidateAsync(CandidateDto request)
         {
             try
             {
@@ -36,6 +36,7 @@ namespace CapitalPlacementTask.Business.Services.Implementation
                 };
 
                 await _repository.InsertAsync(personalInfo);
+                await _unitOfWork.SaveChangesAsync();
 
                 // Save answers to questions
                 var answers = new List<CandidateAnswer>();
@@ -51,10 +52,8 @@ namespace CapitalPlacementTask.Business.Services.Implementation
 
                     answers.Add(answer);
                 }
-
-                await _candidateRepository.InsertAsync(answers);
+                await _candidateRepository.InsertMultipleAsync(answers);
                 await _unitOfWork.SaveChangesAsync();
-
                 return true;
             }
             catch (Exception ex)
